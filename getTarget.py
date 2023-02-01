@@ -5,6 +5,10 @@ import numpy as np
 # root_vid_details = '/Users/jeffreylu/Desktop/jk_data_only_22/video_details'
 root_vid_details = 'F:/WORK/DATASETS/jk_data_only_22/video_details'
 
+# A = np.zeros((18, 5))
+#b = str(7)
+#b.zfill(10)
+#Out[22]: '0000000007'
 def flatten(l):
     return [item for sublist in l for item in sublist]
 # return a list of file path of all json files in video_detail folder
