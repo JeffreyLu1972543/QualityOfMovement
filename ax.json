@@ -1,0 +1,16 @@
+{
+	"squats":[
+		{
+			"in_and_out":[
+				64,116, 
+				335,380, 385,425, 430,470, 476,518
+
+
+			],
+			"class_label":[
+				"correct", 
+				"incorrect_chin_tuck", "incorrect_chin_tuck", "incorrect_chin_tuck", "incorrect_chin_tuck"
+			]
+		}
+	]
+}
