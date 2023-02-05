@@ -2,9 +2,8 @@ import os
 import json
 import numpy as np
 
-# root_vid_details = '/Users/jeffreylu/Desktop/jk_data_only_22/video_details'
-root_vid_details = 'F:/WORK/DATASETS/jk_data_only_22/video_details'
-
+root_vid_details = '/Users/jeffreylu/Desktop/jk_data_only_22/video_details'
+# root_vid_details = 'F:/WORK/DATASETS/jk_data_only_22/video_details'
 # A = np.zeros((18, 5))
 #b = str(7)
 #b.zfill(10)
@@ -13,33 +12,38 @@ def flatten(l):
     return [item for sublist in l for item in sublist]
 # return a list of file path of all json files in video_detail folder
 def get_json_path(dirname):
-
     jsonfiles_path=[]
     for dirpath,dirnames,filenames in os.walk(dirname):
-        print(len(filenames)) # get all filenames in video_detail
+        print("There are {len} JSON files in current directory".format(len=len(filenames))) # get all filenames in video_detail
     for i in range(len(filenames)):
         jsonfile=os.path.join(root_vid_details, filenames[i]) # get path of all files in video_detail
         jsonfiles_path.append(jsonfile)
     return jsonfiles_path
 
-def get_targetValues(jsonfiles_path):
-    targetClass=[]
+def get_class_labels(jsonfiles_path):
+    class_labels_list=[]
     length=len(jsonfiles_path)
-    for j in range(length):#should be for j in range(length)
-        print(jsonfiles_path[j])
+    for j in range(length):
+        # print(jsonfiles_path[j])
         with open(jsonfiles_path[j], 'r') as f:
             data = json.load(f)
-            # print("hi")
             for d in data['squats']:
-                targetClass.append(d['class_label'])
-    targetClass_list=flatten(targetClass)   
-    return targetClass_list
+                class_labels_list.append(d['class_label'])
+    targetClass_list=flatten(class_labels_list)   
+    return class_labels_list
 
-
-jsonfiles_path=get_json_path(root_vid_details)
-targetClass_list=get_targetValues(jsonfiles_path)
-print(len(targetClass_list))
-print(targetClass_list)
+path=get_json_path(root_vid_details)
+labels=get_class_labels(path)
+#results
+print("-------------------------------------------------")
+labels_flattenList=flatten(labels) 
+print(len(labels_flattenList))
+print(labels_flattenList)
+print("-------------------------------------------------")
+# print(path)
+# print(path)#t j07 a l
+# print(labels[2])
+# print(labels[0])
          
 
 
