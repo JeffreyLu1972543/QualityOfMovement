@@ -1,10 +1,12 @@
 import glob
 import os
 import numpy as np
-a="[gp]*"
-os.chdir("/Users/jeffreylu/Desktop/QualityOfMovement")
-for fpath in glob.glob('*.py'):
-    print(len(fpath))
+# a="[gp]*"
+# os.chdir("/Users/jeffreylu/Desktop/QualityOfMovement")
+# for fpath in glob.glob('*.py'):
+#     print(len(fpath))
+a=np.array([])
+b=np.hstack([a,np.array(5,4,7)])
     # with open(fpath, 'r') as f: 
     #     print(fpath)
 # a=np.arange(1,10,1)

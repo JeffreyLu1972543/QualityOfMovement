@@ -41,7 +41,7 @@ print(len(labels_flattenList))
 print(labels_flattenList)
 print("-------------------------------------------------")
 # print(path)
-# print(path)#t j07 a l
+# print(path)#t j07 a l j06 s02 r ry j01
 # print(labels[2])
 # print(labels[0])
          
