@@ -1,6 +1,7 @@
 import os
 import json
 import numpy as np
+import pickle
 
 root_vid_details = '/Users/jeffreylu/Desktop/jk_data_only_22/video_details'
 # root_vid_details = 'F:/WORK/DATASETS/jk_data_only_22/video_details'
@@ -38,7 +39,7 @@ labels=get_class_labels(path)
 print("-------------------------------------------------")
 labels_flattenList=flatten(labels) 
 print(len(labels_flattenList))
-print(labels_flattenList)
+# print(labels_flattenList)
 print("-------------------------------------------------")
 # print(path)
 # print(path)#t j07 a l j06 s02 r ry j01
@@ -46,6 +47,12 @@ print("-------------------------------------------------")
 # print(labels[0])
          
 
-
+fw=open('labels.p', 'wb')
+pickle.dump(labels_flattenList, fw) 
+fw.close()
+fr=open('labels.p', 'rb')
+labels_depickled = pickle.load(open('labels.p', 'rb')) 
+print("Depickled label data : {a}".format(a=len(labels_depickled)))
+fr.close()
 
 

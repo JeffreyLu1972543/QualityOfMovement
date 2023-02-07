@@ -2,6 +2,7 @@ import os
 import json
 import numpy as np
 import glob
+import pickle
 
 def get_json_path(root_vid_details):
     jsonfiles_path=[]
@@ -68,11 +69,25 @@ squats_list=get_squats(root_openpose_data,in_and_outs,filenames)
 print("-----------------------------------------")
 get_input_structure(squats_list)
 
-# print(in_and_outs[2])
-# print(jsonfiles_path)
-openposedata_path="/Users/jeffreylu/Desktop/jk_data_only_22/openposedata"
-openposedata_dirs=[name for name in os.listdir(openposedata_path) if os.path.isdir(os.path.join(openposedata_path, name))]
-# print (openposedata_dirs)
+fw=open('squat_data.p', 'wb')
+pickle.dump(squats_list, fw) 
+fw.close()
+fr=open('squat_data.p', 'rb')
+all_squat_data_depickled = pickle.load(open('squat_data.p', 'rb')) 
+print(len(all_squat_data_depickled),all_squat_data_depickled[0].shape)
+fr.close()
+
+
+
+
+
+
+
+# # print(in_and_outs[2])
+# # print(jsonfiles_path)
+# openposedata_path="/Users/jeffreylu/Desktop/jk_data_only_22/openposedata"
+# openposedata_dirs=[name for name in os.listdir(openposedata_path) if os.path.isdir(os.path.join(openposedata_path, name))]
+# # print (openposedata_dirs)
 
 
 
@@ -89,38 +104,4 @@ openposedata_dirs=[name for name in os.listdir(openposedata_path) if os.path.isd
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# inputList=[]
-# for i in range(len(in_and_outs)):
-#     Squatsforonedirectory=[]
-#     singleVideo=os.path.join(openposedata_path, openposedata_dirs[i])
-#     for dirpath,dirnames,filenames in os.walk(singleVideo):
-#         #  print(filenames)
-#          print("hi")
-#     for j in range(in_and_outs[i].shape[0]):
-#         start=in_and_outs[i][j][0]
-#         end=in_and_outs[i][j][1]
-#         videoframes=np.arange(start,end,1)   
-#         for k in range(len(videoframes)):
-#             a=os.path.join(singleVideo,"DSC_0734_0000000000"+str(videoframes[k])+"_keypoints.json")
-#         # b=os.path.join(a,str(videoframes[k]))
-#         # singleframe=os.path.join(b,"_keypoints")
-#             with open(a, 'r') as f:
-#                 data = json.load(f)
-#             for d in data['people']:
-#                 singlesquat=(np.array(d['pose_keypoints']).reshape(-1,3))[:,1]
-#         Squatsforonedirectory.append(singlesquat)
-#         # singleSquat=np.concatenate((singleSquat,a),axis=1)
-#     inputList.append(Squatsforonedirectory) 
-# # print(inputList[0])
 
