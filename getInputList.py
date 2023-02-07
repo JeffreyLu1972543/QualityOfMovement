@@ -69,14 +69,15 @@ squats_list=get_squats(root_openpose_data,in_and_outs,filenames)
 print("-----------------------------------------")
 get_input_structure(squats_list)
 
-fw=open('squat_data.p', 'wb')
-pickle.dump(squats_list, fw) 
-fw.close()
-fr=open('squat_data.p', 'rb')
-all_squat_data_depickled = pickle.load(open('squat_data.p', 'rb')) 
-print(len(all_squat_data_depickled),all_squat_data_depickled[0].shape)
-fr.close()
+os.chdir("/Users/jeffreylu/Desktop/QualityOfMovement")
 
+fw=open('s.p', 'wb')
+pickle.dump(squats_list, fw) 
+# fw.close()
+fr=open('s.p', 'rb')
+all_squat_data_depickled = pickle.load(open('s.p', 'rb')) 
+print(len(all_squat_data_depickled),all_squat_data_depickled[0].shape)
+# fr.close()
 
 
 
