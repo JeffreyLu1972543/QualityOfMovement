@@ -6,12 +6,11 @@ from scipy import interpolate
 plt.rcParams["figure.figsize"]=[7.00, 3.50]
 plt.rcParams["figure.autolayout"]=True
 # Define the values
-x = np.arange(0, 10)
-# e = np.arange(0,10,1)
-# print(x,e)
+x = np.arange(0, 10) # np.arange(0,10,1)
 # y=np.exp(x)
-y = np.exp(-x/5.0) 
-print(y)
+# e=2.718
+y = np.exp(-x/5.0)  # e的多少次方
+# print(y)
 
 # Input Data
 plt.subplot(1,2,1)
@@ -22,7 +21,8 @@ plt.plot(x,y)
 plt.subplot(1,2,2)
 plt.title("Interpolated")
 f = interpolate.interp1d(x, y)
-x_new = np.arange(0, 7, 0.7)
+x_new = np.arange(0, 7, 0.7) #前开后闭
+print(x_new)
 y_new = f(x_new)
 plt.plot(x_new, y_new, 's')
 
