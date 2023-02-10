@@ -32,7 +32,3 @@ print(data1)
 data2 = pickle.load(fr)
 print(data2)
 fr.close()
-
-import numpy as np
-t=np.r_[0:5]
-print(t)
