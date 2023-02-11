@@ -71,7 +71,7 @@ get_input_structure(squats_list)
 
 os.chdir("/Users/jeffreylu/Desktop/QualityOfMovement")
 
-fw=open('s.p', 'wb')
+fw=open('squats.p', 'wb')
 pickle.dump(squats_list, fw) 
 # fw.close()
 fr=open('s.p', 'rb')

@@ -23,7 +23,8 @@ pose_colors = [
     (255., 0., 0.), (0., 255., 85.), (0., 255., 170.), (0., 255., 255.),
     (0., 170., 255.), (0., 85., 255.), (0., 0., 255.), (255., 0., 170.),
 ]
-  
+
+# plot skeleton from keypoint JSON file
 def handle_keypoints_json(jsonfile):
     with open(jsonfile, 'r') as f:
         data = json.load(f) # load JSON
