@@ -47,7 +47,6 @@ def reconstruct_to_one_matrix(intepolated_squats_list):
     
 
 
-
 intepolated_squats_list=Intepolate_all_squats(squats_list)
 final_big_matrix=reconstruct_to_one_matrix(intepolated_squats_list)
 
