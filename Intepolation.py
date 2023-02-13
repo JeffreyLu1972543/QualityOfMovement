@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
 # load data
-squats_list = pickle.load(open("s.p", 'rb')) 
+squats_list = pickle.load(open("squats_original.p", 'rb')) 
 
 # function that only intepolate one row
 def row_intepolated(squats_list):
@@ -50,6 +50,16 @@ def reconstruct_to_one_matrix(intepolated_squats_list):
 
 intepolated_squats_list=Intepolate_all_squats(squats_list)
 final_big_matrix=reconstruct_to_one_matrix(intepolated_squats_list)
+
+fw=open('squats_intepolated.p', 'wb')
+pickle.dump(intepolated_squats_list, fw) 
+fw.close()
+
+
+fw=open('big_matrix.p', 'wb')
+pickle.dump(final_big_matrix, fw) 
+fw.close()
+
 
 # make sure the intepolated squat list has right shape 
 for i in range(len(intepolated_squats_list)):

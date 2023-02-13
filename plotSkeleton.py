@@ -1,7 +1,8 @@
 import json
 import cv2
 import numpy as np
- 
+import pickle
+import os
 pose_pairs = [  # assume it used openpose 18 keypoint model
     [0, 1], [0, 14], [0, 15],
     [1, 2], [1, 5], [1, 8],[1,11],
@@ -14,7 +15,7 @@ pose_pairs = [  # assume it used openpose 18 keypoint model
     [11,12],
     [12,13],
     [14, 16],
-    [15, 17],
+    # [15, 17],
 ] 
 
 pose_colors = [
@@ -24,36 +25,53 @@ pose_colors = [
     (0., 170., 255.), (0., 85., 255.), (0., 0., 255.), (255., 0., 170.),
 ]
 
-# plot skeleton from keypoint JSON file
-def handle_keypoints_json(jsonfile):
-    with open(jsonfile, 'r') as f:
-        data = json.load(f) # load JSON
-
-    img = cv2.imread('black.jpg') # initialize the background
- 
-    for d in data['people']:
-        keypointMatrix = np.array(d['pose_keypoints']).reshape((18, 3)) #(x,y,c)
+# plot skeleton
+def plot_skeleton(single_squat):
+   
+    for j in range(single_squat.shape[1]):
+        background = cv2.imread('black.jpg') # initialize the background
         for p in pose_pairs:
-            pt1_list= list(map(int,keypointMatrix[p[0], 0:2])) # In order to make plot, we need to convert keypoint from float to int
-            pt2_list= list(map(int,keypointMatrix[p[1], 0:2]))
-            pt1 = tuple(pt1_list)
-            pt2 = tuple(pt2_list)
+            x1= int(single_squat[p[0],j])
+            y1= int(single_squat[p[0]+18,j]) 
+            pt1=tuple([x1,y1])
+            x2= int(single_squat[p[1],j])
+            y2= int(single_squat[p[1]+18,j]) 
+            pt2=tuple([x2,y2])
             # when confidence is equal to 0 ...
-            c1 = keypointMatrix[p[0], 2]
-            c2 = keypointMatrix[p[1], 2]
-            if c1 == 0.0 or c2 == 0.0:
-                continue
+            # c1 = keypointMatrix[p[0], 2]
+            # c2 = keypointMatrix[p[1], 2]
+            # if c1 == 0.0 or c2 == 0.0:
+            #     continue
 
             color = tuple(list(map(int, pose_colors[p[0]])))
-            img = cv2.line(img, pt1, pt2, color, thickness=4)  # keypoints must be represented as tuple to be plotted
-            img = cv2.circle(img, pt1, 6, color, thickness=-
+            img = cv2.line(background, pt1, pt2, color, thickness=4)  # keypoints must be represented as tuple to be plotted
+            img = cv2.circle(background, pt1, 6, color, thickness=-
                              1, lineType=8, shift=0)
-            img = cv2.circle(img, pt2, 6, color, thickness=-
+            img = cv2.circle(background, pt2, 6, color, thickness=-
                              1, lineType=8, shift=0)
+        cv2.imwrite('results/{}.png'.format(j), img)
 
-    cv2.imwrite('results/{}.jpg'.format(jsonfile), img)
+# load data
+squats_intepolated = pickle.load(open("squats_intepolated.p", 'rb')) 
+# select one squat to plot skeleton
+print(len(squats_intepolated))
+single_squat=squats_intepolated[5]
+plot_skeleton(single_squat)
 
-handle_keypoints_json("DSC_0808_000000000000_keypoints.json")
 
 
+image_folder = './results'
+video_name = 'video.avi'
+
+images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
+frame = cv2.imread(os.path.join(image_folder, images[0]))
+height, width, layers = frame.shape
+
+video = cv2.VideoWriter(video_name, 0, 1, (width,height))
+
+for image in images:
+    video.write(cv2.imread(os.path.join(image_folder, image)))
+
+cv2.destroyAllWindows()
+video.release()
 
