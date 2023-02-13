@@ -17,6 +17,6 @@ from scipy.interpolate import interp1d
 x3=np.array([[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]],np.int32)
 x4=x3[:,0]
 print(x4)
-x5=x4.reshape((3,2),axis=0)
+x5=x4.reshape(3,2)
 print(x5)
 print(x5.shape)
