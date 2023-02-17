@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import cv2
 from plotSkeleton import *
+from plotskeleton2 import *
 
 big_matrix = pickle.load(open("big_matrix.p", 'rb')) 
 print(big_matrix.shape)
@@ -17,10 +18,14 @@ def offset_normalization(big_matrix):
         for j in range(single_squat_x.shape[1]): #40
             offset_x=single_squat_x[10][j]  # left ankle point
             offset_y=single_squat_y[10][j]  # left ankle point
-            # single_squat_x[:,j]=single_squat_x[:,j]-offset_x
-            # single_squat_y[:,j]=single_squat_y[:,j]-offset_y
-            assert single_squat_x[10,j] == 0, "the x value of keypoint No.10 should be zero after subtract itself"
-            assert single_squat_y[10,j] == 0, "the y value of keypoint No.10 should be zero after subtract itself"
+            print(offset_x)
+            print(offset_y)
+            single_squat_x[:,j]=single_squat_x[:,j]-offset_x
+            single_squat_y[:,j]=single_squat_y[:,j]-offset_y
+            # single_squat_x[:,j]=single_squat_x[:,j]-10
+            # single_squat_y[:,j]=single_squat_y[:,j]-10
+            # assert single_squat_x[10,j] == 0, "the x value of keypoint No.10 should be zero after subtract itself"
+            # assert single_squat_y[10,j] == 0, "the y value of keypoint No.10 should be zero after subtract itself"
         single_flat_squat=(np.concatenate((single_squat_x,single_squat_y),axis=0)).flatten()
         normalized_matrix[:,i] = single_flat_squat
     return normalized_matrix
@@ -38,7 +43,7 @@ def offset_normalization(big_matrix):
             
 
 normalized_matrix=offset_normalization(big_matrix)
-plot_skeleton(big_matrix)
+plot_skeleton_2(big_matrix)
 # check_correctness(normalized_matrix)
 fw=open('normalized_matrix.p', 'wb')
 pickle.dump(normalized_matrix, fw) 

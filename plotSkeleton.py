@@ -50,8 +50,8 @@ def plot_skeleton(big_matrix):
                                 1, lineType=8, shift=0)
                 img = cv2.circle(background, pt2, 6, color, thickness=-
                                 1, lineType=8, shift=0)
-            cv2.imwrite('/Users/jeffreylu/Desktop/skeleton_plot/No.{a}_squat{b}.png'.format(a=i,b=j), img)
-            # cv2.imwrite('/Users/jeffreylu/Desktop/skeleton_plot_normalized/No.{a}_squat{b}.png'.format(a=i,b=j), img)
+            # cv2.imwrite('/Users/jeffreylu/Desktop/skeleton_plot/No.{a}_squat{b}.png'.format(a=i,b=j), img)
+            cv2.imwrite('/Users/jeffreylu/Desktop/skeleton_plot_normalized/No.{a}_squat{b}.png'.format(a=i,b=j), img)
 
 # load data
 squats_intepolated = pickle.load(open("squats_intepolated.p", 'rb')) 
