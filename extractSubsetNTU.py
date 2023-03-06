@@ -6,8 +6,6 @@ import shutil
 ntu_path = '/Users/jeffreylu/Desktop/NTUdataset/nturgbd_skeletons_s001_to_s017/'
 output_path = '/Users/jeffreylu/Desktop/NTUdataset/subset'
 
-
-# Set the path to the NTU RGB+D skeleton dataset
 def getSubset_NTU(ntu_path,output_path):
     # Set the subset of actions to extract
     subset_actions = [7,8,17,21,22,27,88] 
@@ -20,7 +18,7 @@ def getSubset_NTU(ntu_path,output_path):
         input_filename=os.path.join(ntu_path, skeleton_file)
         # Get the action label for the current data
         action_label = int(skeleton_file.split('A')[1][:3]) #S017C003P020R002A055.skeleton => 055
-        # If the action label is in the list of actions to extract, save the data to disk
+        # If the action label is in the list of actions to extract, save the data
         if action_label in subset_actions:
             output_filename = os.path.join(output_path, skeleton_file)
             shutil.copy(input_filename , output_path)
