@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 a=np.array([[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]])
 print(a[:,0])
 b=a[:,0]
@@ -46,4 +47,11 @@ def plot_skeleton_2(big_matrix):
             ax.text(0-250, 0-100, f'left ankle \n ({0}, {0})',fontsize=6.5)
             plt.title("No.{a} squat No.{b} frame".format(a=i,b=j))
             plt.show()
+
+
+big_matrix = pickle.load(open("big_matrix.p", 'rb')) 
+# select one squat to plot skeleton
+
+
+plot_skeleton_2(big_matrix)
             

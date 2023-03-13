@@ -67,6 +67,7 @@ zmax = np.max(point[2, :, :, :])
 zmin = np.min(point[2, :, :, :])
  
 row = point.shape[1]
+print("ssssssssdddd",point.shape[1])
 print(point.shape)
  
  
